@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0-beta3/css/all.min.css" integrity="sha512-xxx" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <link rel="icon" type="image/x-icon" href="duhas.ico">
+  <title>Punch Shop™ • Account Shop</title>
+  <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-image: url("bg-img8.jpg");
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      border-radius: 10px;
+      padding: 20px;
+      color: #ffffff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffffffe0;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      max-width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .logo img {
+      max-width: 95%;
+      height: auto;
+    }
+
+    .navbar {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 20px;
+      font-weight: 550;
+    }
+
+    .navbar a {
+      color: #ffffffdc;
+      text-decoration: none;
+      margin-right: 10px;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+
+    .product-grid {
+      display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  justify-content: center; /* Center horizontally */
+  align-content: center; /* Center vertically */
+}
+
+    .product-card {
+      background-color: rgba(255, 255, 255, 0.904);
+      padding: 5px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      text-decoration: none; /* Remove underline from product card */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%; /* Adjust width based on column count */
+      max-height: 500px;
+    }
+
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-card h3 {
+      margin-bottom: 1px;
+      color: #2e2e2ee5;
+      text-decoration: none; /* Remove underline from product name */
+    }
+
+    .product-card p {
+      color: #000000da;
+      text-decoration: none; /* Remove underline from product description */
+      font-size: 13px;
+    }
+
+    .product-card .price {
+      margin-bottom: 20px;
+      color: #00000086;
+      font-size: 16px;
+    }
+
+    .product-card img {
+      width: 270px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 0%;
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
+
+    .product-card button {
+      background-color: #673ed6;
+      color: #fff;
+      border: none;
+      padding: 9px 100px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .buy-with-crypto {
+      background-color: #673ed6;
+      color: #fff;
+      border: none;
+      padding: 9px 50px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 50px;
+    }
+
+    .product-card button:hover {
+      background-color: #662eff;
+    }
+
+    @media screen and (max-width: 1050px) {
+
+      .container {
+        margin: 20px auto;
+        padding: 10px;
+      }
+
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .product-card img {
+        width: 80%;
+        height: auto;
+      }
+
+      .logo img {
+        max-width: 90%;
+        height: auto;
+      }
+
+      .product-card button {
+      background-color: #673ed6;
+      color: #fff;
+      border: none;
+      padding: 9px 200px;
+      border-radius: 4px;
+      cursor: pointer;
+      }
+    }
+
+    @media screen and (max-width: 860px) {
+
+.container {
+  margin: 20px auto;
+  padding: 10px;
+}
+
+
+.product-grid {
+    grid-template-columns: 1fr;
+  }
+
+.product-card img {
+  width: 60%;
+  height: auto;
+}
+
+.logo img {
+  max-width: 90%;
+  height: auto;
+}
+}
+
+    h3.footer {
+        color: white;
+        font-weight: 400;
+        margin-right: 10px;
+    }
+
+
+    .username {
+      margin: 20px auto;
+      font-size: 18px;
+    }
+
+    /* POP UP */
+    /* POP UP */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.829);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 40px; /* Increase padding for a larger popup */
+      border-radius: 10px;
+      text-align: center;
+      max-width: 90%; /* Adjust max-width as needed */
+      width: 500px; /* Fixed width if needed, adjust as needed */
+    }
+
+    .popup-content p {
+      margin-bottom: 20px;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 15px;
+      right: 23px;
+      cursor: pointer;
+    }
+
+    .close-popup::before {
+      content: 'X';
+      font-size: 35px;
+      color: white;
+    }
+
+    .close-popup:hover {
+      color: red;
+    }
+    
+    .popup-overlay button {
+      background-color: #673ed6;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    /* POP UP END*/
+    /* POP UP END*/
+
+    #nestedPopup .popup-content {
+  padding: 60px; /* Increase padding for a larger popup */
+  max-width: 50%; /* Adjust max-width as needed */
+  width: 350px; /* Fixed width if needed, adjust as needed */
+}
+
+    img.smaller {
+      object-fit: fill;
+       max-width: 100%;
+    }
+
+    .textbox {
+  width: 70%; /* Adjust this percentage based on your layout */
+  height: 30px;
+  outline-color: #662eff;
+  border-color: #642bff;
+  border-radius: 3px;
+  outline-style: none;
+  margin-bottom: 50px;
+  margin-right: 10px; /* Adjust this margin as needed */
+}
+
+    .pbig {
+      font-size: 20px;
+    }
+
+    .centras {
+      text-align: left;
+    }
+
+    .kaman {
+      font-weight: 200;
+    }
+
+    button.checkout-button {
+      background-color: #673ed6;
+      color: #fff;
+      border: none;
+      padding: 9px 100px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #telegram-widget {
+  position: fixed;
+  bottom: 90px;
+  right: 26px;
+  z-index: 1000; /* Adjust the z-index to ensure it's above other elements */
+}
+
+.telegram-logo {
+  width: 60px; /* Adjust the size of the oval photo */
+  height: auto;
+  border-radius: 50%; /* Create an oval shape */
+}
+
+
+.reviews-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px; /* Adjust as needed */
+}
+
+.stars {
+  margin-right: 1px; /* Adjust the margin between stars and count */
+  cursor: pointer;
+}
+
+.star {
+  font-size: 16px; /* Adjust as needed */
+  color: gold;
+}
+
+.reviews-count {
+  font-size: 16px; /* Adjust as needed */
+  margin-left: 5px; /* Adjust the margin between stars and count */
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.fa-thumbs-up {
+  color: green;
+}
+
+.reviews-container {
+    overflow: hidden;
+  }
+
+  .review-item {
+    margin-bottom: 10px;
+    padding-left: 25px; /* Adjust as needed */
+    position: relative;
+  }
+
+  .review-item img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  list-style: none;
+  padding: 0;
+  font-weight: 600;
+}
+
+.reviews-list li {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-bottom: 1px; /* Add spacing between reviews */
+}
+
+.review-text {
+  margin-left: 10px; /* Add space between the thumbs-up icon and the review text */
+}
+
+li.comment {
+  font-weight: 400;
+  margin-bottom: 24px;
+  margin-left: 30px;
+}
+
+.bigger {
+  font-weight: 400;
+}
+
+.gg1 {
+  font-size: 25px;
+}
+
+.far {
+  margin-right: 10px;
+}
+  </style>
+</head>
+<body>
+  <!--<div class="welcome-back">
+    <div class="username">
+      Welcome back, <span id="username"></span>!
+    </div>
+  </div>-->
+
+
+  <div class="container">
+    <div class="logo">
+      <a href="https://punch-made.shop/"><img src="miamihacks.png" alt="Logo"></a>
+    </div>
+    <center>
+    <div class="navbar">
+      <a href="#onsale">ON SALE</a>
+      <a href="#fullz">FULLZ & CC</a>
+      <a href="#bank">BANK LOGS</a>
+      <a href="#crypto">CRYPTO LOGS</a>
+    </div>
+  </center>
+  <hr>
+  
+  <h2 id="onsale">🥊 On Sale 🥊</h2>
+    <div class="product-grid">
+      <a href="#" class="product-card" onclick="openPopup('Cash App FA', event, '⚡ Cash App logins with $3K-5K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 80, 'https://commerce.coinbase.com/checkout/d975a90b-a5d2-4a5f-ba95-2a101fb9cbb5', 'Buy with Crypto')">
+        <img src="prod/cashapp.gif" alt="Product 1">
+        <h3>Cash App FA</h3>
+        <p class="price">$80.00 USD / in stock</p>
+        <button>Purchase</button>
+      </a>
+
+      <a href="#" class="product-card" onclick="openPopup('OTP Bot (Download)', event, '⚡ OTP BOT allows you to capture SMS & Email codes. <br>⚡ Full Download.<br> 24/7 Support & FULL Walkthrough. <br>⚡ Simple and easy. Available to hi-jack all mobile phones and email addresses 2FA codes. <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 150, 'https://commerce.coinbase.com/checkout/ddd26b40-0476-4574-bc96-0288098ffe9c', 'Buy with Crypto')">
+        <img class="smaller" src="prod/otp.png" alt="Product 2">
+        <h3>OTP Bot (Download)</h3>
+        <p class="price">$150.00 USD / in stock</p>
+        <button>Purchase</button>
+      </a>
+
+      <a href="#" class="product-card" onclick="openPopup('Linkable CC', event, '⚡ Linkable CC with $7K-10K Balance. <br>⚡ Attaches to Cashapp, PayPal, Apple Pay. <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 90, 'https://commerce.coinbase.com/checkout/7f974669-6762-4be0-9e24-d8682e036897', 'Buy with Crypto')">
+        <img src="prod/vm.gif" alt="Product 3">
+        <h3>Linkable CC</h3>
+        <p class="price">$90.00 USD / 12+ in stock</p>
+        <button>Purchase</button>
+      </a>
+      </div>
+
+    <h2 id="fullz">🥊 Fullz & CC 🥊</h2>
+<div class="product-grid">
+  <a href="#" class="product-card" onclick="openPopup('Fullz + Linkable CC', event, '⚡ ID front + back, SSN and $7K-10K CC <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 125, 'https://commerce.coinbase.com/checkout/56006908-8c38-4453-b31d-fe38bd53783d', 'Buy with Crypto')">
+    <img src="prod/idcard.gif" alt="Product 3">
+    <h3>Fullz + Linkable CC</h3>
+    <p class="price">$125.00 USD / 28+ in stock</p>
+    <button>Purchase</button>
+  </a>
+
+  <a href="#" class="product-card" onclick="openPopup('American Express', event, '⚡ AMEX Linkable CC with $4K-6K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 80, 'https://commerce.coinbase.com/checkout/57607952-2f0d-492a-b00a-304ceef2849b', 'Buy with Crypto')">
+    <img src="prod/amex.gif" alt="Product 3">
+    <h3>AMEX</h3>
+    <p class="price">$80.00 USD / in stock</p>
+    <button>Purchase</button>
+  </a>
+
+   <a class="product-card">
+    <img src="prod/yahoo.gif" alt="Product 3">
+    <h3>Yahoo Mail Logins</h3>
+    <p class="price">$0.50 USD / out of stock</p>
+    <button>Purchase</button>
+  </a>
+  </div>
+
+
+  <h2 id="bank">🥊 Bank Logs 🥊</h2>
+<div class="product-grid">
+  <a href="#" class="product-card" onclick="openPopup('Wells Fargo FA', event, '⚡ WF logins with $3K-4K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 80, 'https://commerce.coinbase.com/checkout/dc0da7b9-e543-446f-899c-2c33b9c45e04', 'Buy with Crypto')">
+    <img src="prod/wells.gif" alt="Product 2">
+    <h3>WF FA</h3>
+    <p class="price">$80.00 USD / in stock</p>
+    <button>Purchase</button>
+  </a>
+
+  <a href="#" class="product-card" onclick="openPopup('BOA FA', event, '⚡ BOA App logins with $4K-6K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 100, 'https://commerce.coinbase.com/checkout/9ebe2514-5052-49c7-973a-fa818064f314', 'Buy with Crypto')">
+    <img src="prod/bankof.gif" alt="Product 3">
+    <h3>BOA FA</h3>
+    <p class="price">$100.00 USD / in stock</p>
+    <button>Purchase</button>
+  </a>
+
+  <a href="#" class="product-card" onclick="openPopup('PayPal FA', event, '⚡ PayPal logins with $4K-8K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 70, 'https://commerce.coinbase.com/checkout/82025863-02d5-41f0-8d76-37471b49a6b6', 'Buy with Crypto')">
+    <img src="prod/paypal.gif" alt="Product 3">
+    <h3>PayPal FA</h3>
+    <p class="price">$70.00 USD / in stock</p>
+    <button>Purchase</button>
+  </a>
+
+  <a href="#" class="product-card" onclick="openPopup('Chase Business FA', event, '⚡ Chase Business with $10K-14K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 150, 'https://commerce.coinbase.com/checkout/b46b6eec-3b3d-4f59-8a68-bb791a0006aa', 'Buy with Crypto')">
+      <img src="prod/chase.gif" alt="Product 3">
+      <h3>Chase Business FA</h3>
+      <p class="price">$150.00 USD / in stock</p>
+      <button>Purchase</button>
+    </a>
+  
+    <a href="#" class="product-card" onclick="openPopup('MoneyLion FA', event, '⚡ MoneyLion logins with $1K-2K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 60, 'https://commerce.coinbase.com/checkout/f330d3dd-1a04-4185-adc8-ca5eb2d0af8d', 'Buy with Crypto')">
+      <img src="prod/moneylion.gif" alt="Product 3">
+      <h3>MoneyLion FA</h3>
+      <p class="price">$60.00 USD / in stock</p>
+      <button>Purchase</button>
+    </a>
+  
+    <a href="#" class="product-card" onclick="openPopup('Chime FA', event, '⚡ Chime logins with $1K-1.5K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 60, 'https://commerce.coinbase.com/checkout/b234f3bf-ed17-4f99-86c0-0ead20f8eff0', 'Buy with Crypto')">
+      <img src="prod/chime.gif" alt="Product 3">
+      <h3>Chime FA</h3>
+      <p class="price">$60.00 USD / in stock</p>
+      <button>Purchase</button>
+    </a>
+  </div>
+
+
+  <h2 id="crypto">🥊 Crypto Logs 🥊</h2>
+
+  <div class="product-grid">
+    <a href="#" class="product-card" onclick="openPopup('Cash App FA', event, '⚡ Coinbase logins with 3K-5K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 70, 'https://commerce.coinbase.com/checkout/368f642f-3f58-4d29-8149-e14a65bb8dca', 'Buy with Crypto')">
+      <img src="prod/coinbase.gif" alt="Product 1">
+      <h3>Coinb@se FA</h3>
+      <p class="price">$70.00 USD / in stock</p>
+      <button>Purchase</button>
+    </a>
+
+    <a href="#" class="product-card" onclick="openPopup('Cash App FA', event, '⚡ Trust Wallet logins with 3K-6K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 80, 'https://commerce.coinbase.com/checkout/d37c93bf-29a1-46bc-bebb-735742bd9c70', 'Buy with Crypto')">
+      <img src="prod/trust.gif" alt="Product 2">
+      <h3>Trust Wallet FA</h3>
+      <p class="price">$80.00 USD / in stock</p>
+      <button>Purchase</button>
+    </a>
+
+    <a href="#" class="product-card" onclick="openPopup('Cash App FA', event, '⚡ MetaMask logins with 4K-6K Balance. <br>⚡ 1 Month Warranty <br>⚡ If you buy this item, you’ll get my full support on telegram if there is a problem! <br><br>📱 Contact: <a href=\'https://t.me/punch_made_devs\' target=\'_blank\'>t.me/punchmade</a> ✔️', 90, 'https://commerce.coinbase.com/checkout/9028348c-3f42-4f5b-85b2-eebdd960eed5', 'Buy with Crypto')">
+      <img src="prod/metmask.gif" alt="Product 3">
+      <h3>MetaMask FA</h3>
+      <p class="price">$90.00 USD / in stock</p>
+      <button>Purchase</button>
+    </a>
+    </div>
+
+  </div>
+
+   <!-- Popup -->
+<div id="popup" class="popup-overlay" onclick="closePopup()">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <span class="close-popup" onclick="closePopup()"></span>
+    <div id="popupContent"></div>
+  </div>
+</div>
+
+<div id="nestedPopup" class="popup-overlay" onclick="closeNestedPopup()">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <span class="close-popup" onclick="closeNestedPopup()"></span>
+    <div id="nestedPopupContent"></div>
+  </div>
+</div>
+
+  <center>
+    <hr>
+    <div class="reviews-section">
+      <h3 class="footer">&copy; 2023 PunchMade. All rights reserved.</h3>
+      <div class="stars">
+        <span class="star" onclick="openReviewsPopup()">&#9733;</span>
+        <span class="star" onclick="openReviewsPopup()">&#9733;</span>
+        <span class="star" onclick="openReviewsPopup()">&#9733;</span>
+        <span class="star" onclick="openReviewsPopup()">&#9733;</span>
+        <span class="star" onclick="openReviewsPopup()">&#9733;</span>
+      </div>
+      <span class="reviews-count" onclick="openReviewsPopup()">(27)</span>
+    </div>
+       
+
+    <div id="reviewsPopup" class="popup-overlay" onclick="closeReviewsPopup()">
+      <div class="popup-content" onclick="event.stopPropagation()">
+        <span class="close-popup" onclick="closeReviewsPopup()">X</span>
+        <div id="reviewsContent">
+          <h3 class="gg1">Feedback for Punch Shop™ (27)</h3>
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span> 4.8/5
+          </div>
+          <ul class="reviews-list">
+            <li><img class="far" src="thumbsup.png"/>BOA FA | Few days ago</li>
+            <li class="comment">Logs are clean n very nice</li>
+
+            <li><img class="far" src="thumbsup.png"/>Linkable CC | 1 Month ago</li>
+            <li class="comment">Fresh cc's</li>
+
+            <li><img class="far" src="thumbsup.png"/>Cash App FA | 1 Month ago</li>
+            <li class="comment">Good</li>
+
+            <li><img class="far" src="thumbsup.png"/>Chime FA | 3 Months ago</li>
+            <li class="comment">Good shop refunded not working login</li>
+
+            <li><img class="far" src="thumbsdown.png"/>Yahoo Mail Logins | 4 Months ago</li>
+            <li class="comment">had to wait for 2 hours for my yahoo replacement not fast.</li>
+
+            <li><img class="far" src="thumbsup.png"/>Cash App FA | 4 Months ago</li>
+            <li class="comment">best sh*t out there</li>
+
+            <li><img class="far" src="thumbsup.png"/>PayPal FA | 6 Months ago</li>
+            <li class="comment">Fast response time got the bag</li>
+          </ul>
+          <p class="bigger">End of Feedbacks 😕</p>
+        </div>
+      </div>
+    </div>
+    
+    
+  </center>
+
+  <div id="telegram-widget">
+    <a href="https://t.me/punch_made_devs" target="_blank">
+      <img src="telegram-logo.webp" alt="Telegram" class="telegram-logo">
+    </a>
+  </div>
+
+  <script>
+function openPopup(productName, event, productDescription, buyLink, nestedPopupText) {
+  event.preventDefault();  // Prevent the default behavior of the anchor link
+  openNestedPopup(productName, productDescription, buyLink, nestedPopupText);
+}
+
+
+function openPopup(productName, event, productDescription, price, buyLink, nestedPopupButtonText) {
+  event.preventDefault();  // Prevent the default behavior of the anchor link
+
+  const popupContent = document.getElementById('popupContent');
+  popupContent.innerHTML = `
+    <h1>${productName}</h1>
+    <p class="kaman">In stock | Price ${price}.00$ USD</p>
+    <p class="centras">${productDescription}</p>
+    <button class="checkout-button">Check Out For $${price}.00</button>`;
+
+  document.getElementById('popup').style.display = 'flex';
+
+  // Set the onclick event for the "Purchase" button to open the nested popup
+  const purchaseButton = document.querySelector('.checkout-button');
+  purchaseButton.onclick = function() {
+    openNestedPopup(productName, productDescription, buyLink, nestedPopupButtonText);
+  };
+}
+
+
+function openNestedPopup(productName, productDescription, buyLink, nestedPopupButtonText) {
+  const nestedPopupContent = document.getElementById('nestedPopupContent');
+  nestedPopupContent.innerHTML = `
+    <p class="pbig">Where would you like us to send your ${productName}?</p>
+    <input class="textbox" type="text" placeholder=" your@email.com" name="gmail" id="emailInput" required />
+    <div>
+      <a class="buy-with-crypto" href="${buyLink}" onclick="return checkEmail()">
+        ${nestedPopupButtonText}
+      </a>
+    </div>`;
+
+  document.getElementById('nestedPopup').style.display = 'flex';
+}
+
+
+
+
+
+function checkEmail() {
+  const emailInput = document.getElementById('emailInput');
+  const email = emailInput.value.trim(); // Trim to remove leading/trailing spaces
+
+  if (email === '') {
+    alert('Please enter your email.');
+    return false; // Prevent the link from being followed
+  }
+
+  // Allow the link to be followed if email is entered
+  return true;
+}
+
+
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
+
+function closeNestedPopup() {
+  document.getElementById('nestedPopup').style.display = 'none';
+}
+
+    function redirectToCheckout() {
+    console.log('Redirecting to checkout...');
+    window.location.href = 'checkout.html';  // Replace with the actual URL
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const purchaseButton = document.querySelector('#purchaseButton');
+    if (purchaseButton) {
+      purchaseButton.addEventListener('click', redirectToCheckout);
+    }
+  });
+
+
+  // Reviews Popup !!!! ---- !!!!!
+  function openReviewsPopup() {
+  document.getElementById('reviewsPopup').style.display = 'flex';
+}
+
+function closeReviewsPopup() {
+  document.getElementById('reviewsPopup').style.display = 'none';
+}
+
+
+  </script>
+
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/647646f174285f0ec46e90ce/1h1n0a8cf';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+
+</body>
+</html>
